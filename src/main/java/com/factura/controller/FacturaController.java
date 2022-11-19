@@ -57,8 +57,15 @@ public class FacturaController {
     }
 
     @GetMapping("/search/{numFac}")
-    private ResponseEntity<Factura> buscarFactura(@PathVariable("numFac") String numeroFactura) {
-        return ResponseEntity.ok(facturaService.buscarNumeroFactura(numeroFactura));
+    private ResponseEntity<List<Factura>> buscarFactura(@PathVariable("numFac") String numeroFactura) {
+        List<Factura> lista = facturaService.listarFacturas();
+        List<Factura> listaConsulta = null;
+        for(Factura f: lista){
+            if(f.getNumeroFactura().equals(numeroFactura)){
+                listaConsulta.add(f);
+            }
+        }
+        return ResponseEntity.ok(listaConsulta);
 
     }
 
