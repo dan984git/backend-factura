@@ -1,6 +1,7 @@
 package com.factura.controller;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +60,7 @@ public class FacturaController {
     @GetMapping("/search/{numFac}")
     private ResponseEntity<List<Factura>> buscarFactura(@PathVariable("numFac") String numeroFactura) {
         List<Factura> lista = facturaService.listarFacturas();
-        List<Factura> listaConsulta = null;
+        List<Factura> listaConsulta = new ArrayList<>();
         for(Factura f: lista){
             if(f.getNumeroFactura().equals(numeroFactura)){
                 listaConsulta.add(f);
